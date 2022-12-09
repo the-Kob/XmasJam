@@ -415,7 +415,10 @@ MonoBehaviour:
   - {fileID: 8801189333283967620, guid: ec013b98470d2114d83fda0983eb7ad1, type: 3}
   sections: []
   avalibleCollectibles:
-  - {fileID: 3092564786265349608, guid: 26bdb500f4d963846b4b710b4a38c121, type: 3}
+  - {fileID: 3953669342832724752, guid: 09085b47ba2e206409c32c06eab30e7f, type: 3}
+  - {fileID: 6398412326331298830, guid: d671a7f243fc75c458967b85034e5fcc, type: 3}
+  - {fileID: 2411147712088614481, guid: df9058f43431b2740b4af46404c3bfaf, type: 3}
+  chanceToSpawnCollectible: 70
 --- !u!1 &700324369
 GameObject:
   m_ObjectHideFlags: 0

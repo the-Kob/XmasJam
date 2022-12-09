@@ -8,15 +8,14 @@ public class GameManager : MonoBehaviour
 {
     static float MAX_TIME_INACTIVE = 3.0f;
 
-    Player player;
+    public Player player;
 
-    public bool isGameRunning;
+    bool isGameRunning;
 
     float timePassedInactive;
 
     void Awake()
     {
-        player = FindObjectOfType<Player>();
         isGameRunning = true; // TODO change this value to false, it's only true for debugging purposes
         timePassedInactive = 0.0f;
     }
@@ -27,7 +26,7 @@ public class GameManager : MonoBehaviour
         {
             # region Move
 
-            if (Input.GetKey(KeyCode.W) && player.HasFuel())
+            if (Input.GetKey(KeyCode.Space) && player.HasFuel())
             {
                 player.Move();
             }

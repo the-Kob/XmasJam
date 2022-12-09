@@ -7,12 +7,15 @@ public class Player : MonoBehaviour
     [SerializeField]
     Vector2 spawnPos;
 
+    float movementSpeed;
     public float maxMovementSpeed;
     [HideInInspector]
     public float initialMaxMovementSpeed; // used to reset the value
 
-    public float accelaration;
-    public float glueAccelarationMultipliyer;
+    public float acceleration;
+    [HideInInspector]
+    public float initialAcceleration; // used to reset the value
+    public float glueAccelerationMultipliyer;
 
     public float maxFuel;
     [HideInInspector]
@@ -32,6 +35,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         initialMaxMovementSpeed = maxMovementSpeed;
+        initialAcceleration = acceleration;
 
         coins = 0; // Coins are only set to 0 at the start of the game
 
@@ -42,13 +46,13 @@ public class Player : MonoBehaviour
     {
         float speedDifference = maxMovementSpeed - rb.velocity.x;
 
-        float movement = Mathf.Pow(Mathf.Abs(speedDifference) * accelaration, 1.25f);
+        float movement = speedDifference * acceleration;
 
-        rb.AddForce(movement * Vector2.right * Time.fixedDeltaTime);
+        rb.AddForce(movement * Vector2.right, ForceMode2D.Force);
 
         if (!underGlueEffect)
         {
-            currentFuel -= Time.fixedDeltaTime;
+            currentFuel -= Time.deltaTime;
         }
     }
 
@@ -67,8 +71,7 @@ public class Player : MonoBehaviour
         underGlueEffect = true;
 
         maxMovementSpeed += movementSpeedPlus;
-
-        accelaration *= glueAccelarationMultipliyer;
+        acceleration *= glueAccelerationMultipliyer;
 
         Invoke(nameof(ResetGlue), duration);
     }
@@ -78,8 +81,7 @@ public class Player : MonoBehaviour
         underGlueEffect = false;
 
         maxMovementSpeed = initialMaxMovementSpeed;
-
-        accelaration /= glueAccelarationMultipliyer;
+        acceleration = initialAcceleration;
     }
 
     public void RefillFuel(float fuelPlus)

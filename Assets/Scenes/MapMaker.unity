@@ -184,8 +184,9 @@ MonoBehaviour:
   spawnPos: {x: 0, y: -2.5}
   maxMovementSpeed: 20
   initialMaxMovementSpeed: 0
-  accelaration: 10
-  glueAccelarationMultipliyer: 10
+  acceleration: 3
+  initialAcceleration: 0
+  glueAccelerationMultipliyer: 3
   maxFuel: 10
   currentFuel: 0
   coins: 0
@@ -444,7 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d55e71c4b96a7854189bbf80a87e9401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGameRunning: 0
+  player: {fileID: 3650009}
 --- !u!4 &700324371
 Transform:
   m_ObjectHideFlags: 0

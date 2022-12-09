@@ -9,11 +9,12 @@ public class MapManager : MonoBehaviour
     // sections list
     public List<GameObject> sections = new List<GameObject>();
     // Start is called before the first frame update
+
+    public List<GameObject> avalibleCollectibles = new List<GameObject>();
     void Start()
     {
         GenerateMap();
         // call move sections every second
-        InvokeRepeating("MoveSections", 1, 0.1f);
     }
 
     // Update is called once per frame
@@ -39,6 +40,20 @@ public class MapManager : MonoBehaviour
             float sectionLength = newSection.transform.localScale.x;
             newSection.transform.position = new Vector3(sectionLength * i, 0, 0);
             sections.Add(newSection);
+
+            // Get CollectiblesSpawnPoints chilren from section
+            Transform[] collectiblesSpawnPoints = newSection.GetComponentsInChildren<Transform>();
+            // loop through all children and randomly spawn collectibles with 50% chance
+            foreach (Transform collectiblesSpawnPoint in collectiblesSpawnPoints)
+            {
+                int randomCollectibleIndex = Random.Range(0, avalibleCollectibles.Count);
+                int randomChance = Random.Range(0, 10);
+                if (randomChance == 0)
+                {
+                    GameObject newCollectible = Instantiate(avalibleCollectibles[randomCollectibleIndex], collectiblesSpawnPoint.position, Quaternion.identity);
+                    newCollectible.transform.parent = collectiblesSpawnPoint;
+                }
+            }
         }
     }
 
@@ -54,25 +69,25 @@ public class MapManager : MonoBehaviour
         sections.Add(newSection);
     }
 
-    // check if the first section is out of the screen and destroy it
+    // check if the first section is out of camera view (the camera moves with the player) and destroy it
     public void CheckSections()
     {
-        if (sections[0].transform.position.x < ((sections[0].transform.localScale.x * -1)))
+        // get camera position
+        float cameraPosition = Camera.main.transform.position.x;
+        // get camera view size
+        float cameraViewSize = Camera.main.orthographicSize * 2;
+        // get section position
+        float sectionPosition = sections[0].transform.position.x;
+        // get section size
+        float sectionSize = sections[0].transform.localScale.x;
+        // if section is out of camera view, destroy it
+        if (sectionPosition + sectionSize < cameraPosition - cameraViewSize)
         {
             Destroy(sections[0]);
             sections.RemoveAt(0);
         }
     }
 
-    //move sections to the left
-    public void MoveSections()
-    {
-        //get all sections
-        //move all sections to the left
-        foreach (GameObject section in sections)
-        {
-            section.transform.position += new Vector3(-1, 0, 0);
-        }
-    }
+
 
 }

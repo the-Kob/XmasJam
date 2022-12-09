@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         {
             # region Move
 
-            if (Input.GetKey(KeyCode.W) && player.hasFuel())
+            if (Input.GetKey(KeyCode.W) && player.HasFuel())
             {
                 player.Move();
             }
@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviour
 
             #endregion
         }
+
+        Debug.Log(player.rb.velocity.x);
     }
 
     private void Reset()
@@ -59,5 +61,4 @@ public class GameManager : MonoBehaviour
 
         player.Reset();
     }
-
 }

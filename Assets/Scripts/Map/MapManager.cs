@@ -8,9 +8,13 @@ public class MapManager : MonoBehaviour
 
     // sections list
     public List<GameObject> sections = new List<GameObject>();
-    // Start is called before the first frame update
+
+    // old sections list
+    public List<GameObject> oldSections = new List<GameObject>();
 
     public List<GameObject> avalibleCollectibles = new List<GameObject>();
+
+    public bool reseting = false;
 
     // chance to spawn collectibles in section serialized in inspector
     [Range(0, 100)]
@@ -27,7 +31,7 @@ public class MapManager : MonoBehaviour
         // check if section is out of the screen and destroy it
         if (sections.Count > 1) CheckSections();
         // if we only have three section left, generate new section
-        if (sections.Count < 3)
+        if (sections.Count < 3 && !reseting)
         {
             GenerateSection(1);
         }
@@ -80,10 +84,10 @@ public class MapManager : MonoBehaviour
         float sectionPosition = sections[0].transform.position.x;
         // get section size
         float sectionSize = sections[0].transform.localScale.x;
-        // if section is out of camera view, destroy it
+        // if section is out of camera view, move it to old sections list
         if (sectionPosition + sectionSize < cameraPosition - cameraViewSize)
         {
-            Destroy(sections[0]);
+            oldSections.Add(sections[0]);
             sections.RemoveAt(0);
         }
     }
@@ -115,10 +119,24 @@ public class MapManager : MonoBehaviour
         newSection.transform.position = new Vector3(0, 0, 0);
         // Get children of new section with tag "SpawnPoint"
         var collectiblesSpawnPoints = GetComponentsInChildren(newSection.transform, "SpawnPoint");
-        // loop through all children and randomly spawn collectibles with chance = chanceToSpawnCollectible
+        // move all sections to the old sections list and clear sections list
+        foreach (GameObject section in sections)
+        {
+            oldSections.Add(section);
+        }
+        sections.Clear();
         // add new section to sections list
         sections.Add(newSection);
-        // destroy all sections except the one created
+    }
+
+    // destroy all sections
+    public void DestroyAllSections()
+    {
+        foreach (GameObject section in oldSections)
+        {
+            Destroy(section);
+        }
+        oldSections.Clear();
     }
 
 

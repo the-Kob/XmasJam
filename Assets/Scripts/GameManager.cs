@@ -78,13 +78,15 @@ public class GameManager : MonoBehaviour
     void Play()
     {
         isGameRunning = true;
+        mapManager.DestroyAllSections();
+        mapManager.reseting = false;
     }
 
     void Reset()
     {
         isGameRunning = false;
         timePassedInactive = 0.0f;
-
+        mapManager.reseting = true;
         mapManager.GenerateSectionAtZero();
         player.Reset();
         cam.SwitchToStore();

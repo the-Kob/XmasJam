@@ -43,6 +43,8 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public Rigidbody2D rb;
 
+    public Animator animator;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -55,6 +57,9 @@ public class Player : MonoBehaviour
         fuelMultiplier = 1.0f;
 
         coins = 0; // Coins are only set to 0 at the start of the game
+
+        // get animator component
+        animator = GetComponent<Animator>();
 
         Reset();
     }
@@ -122,7 +127,7 @@ public class Player : MonoBehaviour
             maxMovementSpeedCart += movementSpeedPlus;
             maxMovementSpeedSurfboard += movementSpeedPlus;
             acceleration *= glueAccelerationMultipliyer;
-
+            animator.SetBool("GotGlue", true);
             Invoke(nameof(ResetGlue), duration);
         }
 
@@ -131,7 +136,7 @@ public class Player : MonoBehaviour
     void ResetGlue()
     {
         underGlueEffect = false;
-
+        animator.SetBool("GotGlue", false);
         maxMovementSpeedCart = initialMaxMovementSpeedCart;
         maxMovementSpeedSurfboard = initialMaxMovementSpeedSurfboard;
         acceleration = initialAcceleration;

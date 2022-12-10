@@ -11,7 +11,7 @@ public class CameraMovement : MonoBehaviour
     public Transform storePosition, playPosition;
     public float transitionDuration = 2.5f;
 
-    Vector3 playerOffset = new Vector3(7, 3, -10);
+    Vector3 playerOffset = new Vector3(7, 1.5f, -10);
 
     void Awake()
     {

@@ -6,6 +6,9 @@ public class MapManager : MonoBehaviour
 {
     public List<GameObject> avalibleSections = new List<GameObject>();
 
+    // shop section
+    public GameObject shopSection;
+
     // sections list
     public List<GameObject> sections = new List<GameObject>();
 
@@ -43,13 +46,14 @@ public class MapManager : MonoBehaviour
     {
         for (int i = 0; i < quantity; i++)
         {
-            // get random section from avalibleSections list
-            int randomIndex = Random.Range(0, avalibleSections.Count);
-            // instantiate section
-            GameObject newSection = Instantiate(avalibleSections[randomIndex], transform);
+            GameObject newSection;
             // set position of new section next to the last section on the list, if there is no sections on the list, set position to 0
             if (sections.Count > 0)
             {
+                // get random section from avalibleSections list
+                int randomIndex = Random.Range(0, avalibleSections.Count);
+                // instantiate section
+                newSection = Instantiate(avalibleSections[randomIndex], transform);
                 // find child object of sections[sections.Count - 1] with name "Ground"
                 var ground = sections[sections.Count - 1].transform.Find("Ground");
                 // get sprite renderer of ground
@@ -75,6 +79,7 @@ public class MapManager : MonoBehaviour
             }
             else
             {
+                newSection = Instantiate(shopSection, transform);
                 newSection.transform.position = new Vector3(0, 0, 0);
 
             }

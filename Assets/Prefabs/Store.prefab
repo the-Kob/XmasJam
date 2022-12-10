@@ -47,4 +47,15 @@ MonoBehaviour:
   pickupLevel: 0
   glueLevel: 0
   refuelLevel: 0
-  player: {fileID: 0}
+  shoppingCartLevelText: {fileID: 0}
+  shoppingCartCostText: {fileID: 0}
+  surfboardLevelText: {fileID: 0}
+  surfboardCostText: {fileID: 0}
+  fuelCapacityLevelText: {fileID: 0}
+  fuelCapacityCostText: {fileID: 0}
+  pickupLevelText: {fileID: 0}
+  pickupCostText: {fileID: 0}
+  glueLevelText: {fileID: 0}
+  glueCostText: {fileID: 0}
+  refuelLevelText: {fileID: 0}
+  refuelCostText: {fileID: 0}

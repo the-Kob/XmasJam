@@ -5,35 +5,16 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    int value;
+    [HideInInspector]
+    public int value;
+
+    Store store;
 
     void Awake()
     {
-        #region Set value with store level
-        int storePickupLevel = 0; // TODO Needs to be retrieved from the store, probably a global variable
-        
-        switch(storePickupLevel)
-        {
-            case 0:
-                value = 1;
-                break;
-            case 1:
-                value = 2;
-                break;
-            case 2:
-                value = 5;
-                break;
-            case 3:
-                value = 10;
-                break;
-            case 4:
-                value = 25;
-                break;
-            case 5:
-                value = 50;
-                break;
-        }
-        #endregion
+        store = FindObjectOfType<Store>();
+
+        value = 2 * store.pickupLevel;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

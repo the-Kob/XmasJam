@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public Player player;
+    Player player;
 
     bool isFollowingPlayer, isLocked;
 
@@ -15,6 +15,8 @@ public class CameraMovement : MonoBehaviour
 
     void Awake()
     {
+        player = FindObjectOfType<Player>();
+
         isFollowingPlayer = false;
         isLocked = true;
     }

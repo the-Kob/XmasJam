@@ -99,6 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGlue: 0
+  baseDuration: 3
+  baseMaxMovementSpeedThreshold: 0.1
+  baseFuelRestorePercentage: 0.1
 --- !u!61 &2411147712088614494
 BoxCollider2D:
   m_ObjectHideFlags: 0

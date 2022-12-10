@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
 {
     static float MAX_TIME_INACTIVE = 3.0f;
 
-    public Player player;
-    public CameraMovement cam;
+    Player player;
+    CameraMovement cam;
 
     public MapManager mapManager;
 
@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        player = FindObjectOfType<Player>();
+        cam = FindObjectOfType<CameraMovement>();
+
         isGameRunning = false;
         timePassedInactive = 0.0f;
         audioManager.Play("AmbienceMusic");
@@ -34,8 +37,6 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.P))
             {
                 PreparePlay();
-
-                Invoke(nameof(Play), 3); // Let the camera go its place
             }
         }
 
@@ -72,7 +73,10 @@ public class GameManager : MonoBehaviour
 
     void PreparePlay()
     {
+        player.UpdateFuel();
         cam.SwitchToPlay();
+
+        Invoke(nameof(Play), 3); // Let the camera go its place
     }
 
     void Play()

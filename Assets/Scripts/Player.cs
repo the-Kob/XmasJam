@@ -8,18 +8,31 @@ public class Player : MonoBehaviour
     Vector2 spawnPos;
 
     float movementSpeed;
-    public float maxMovementSpeed;
+    public float maxMovementSpeedCart;
+    public float maxMovementSpeedSurfboard;
     [HideInInspector]
-    public float initialMaxMovementSpeed; // used to reset the value
+    public float initialMaxMovementSpeedCart; // used to reset the value
+    [HideInInspector]
+    public float initialMaxMovementSpeedSurfboard; // used to reset the value
+    [HideInInspector]
+    public float movementSpeedCartMultiplier;
+    [HideInInspector]
+    public float movementSpeedSufboardMultiplier;
+    [HideInInspector]
+    public bool isOnCart;
 
     public float acceleration;
     [HideInInspector]
     public float initialAcceleration; // used to reset the value
     public float glueAccelerationMultipliyer;
 
+    public float baseMaxFuel;
+    [HideInInspector]
     public float maxFuel;
     [HideInInspector]
     public float currentFuel;
+    [HideInInspector]
+    public float fuelMultiplier;
 
     [HideInInspector]
     public int coins;
@@ -34,8 +47,12 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        initialMaxMovementSpeed = maxMovementSpeed;
+        initialMaxMovementSpeedCart = maxMovementSpeedCart;
+        initialMaxMovementSpeedSurfboard = maxMovementSpeedSurfboard;
+        movementSpeedCartMultiplier = 1.0f;
+        movementSpeedSufboardMultiplier = 1.0f;
         initialAcceleration = acceleration;
+        fuelMultiplier = 1.0f;
 
         coins = 0; // Coins are only set to 0 at the start of the game
 
@@ -44,7 +61,17 @@ public class Player : MonoBehaviour
 
     public void Move()
     {
-        float speedDifference = maxMovementSpeed - rb.velocity.x;
+        float maxSpeed;
+
+        if(isOnCart)
+        {
+            maxSpeed = maxMovementSpeedCart * movementSpeedCartMultiplier;
+        } else
+        {
+            maxSpeed = maxMovementSpeedSurfboard * movementSpeedSufboardMultiplier;
+        }
+
+        float speedDifference = maxSpeed - rb.velocity.x;
 
         float movement = speedDifference * acceleration;
 
@@ -66,6 +93,13 @@ public class Player : MonoBehaviour
         coins += value;
     }
 
+    public void UpdateFuel()
+    {
+        maxFuel = baseMaxFuel * fuelMultiplier;
+
+        currentFuel = maxFuel;
+    }
+
     public void SniffGlue(float movementSpeedPlus, float duration)
     {
         if(underGlueEffect)
@@ -80,7 +114,11 @@ public class Player : MonoBehaviour
         {
             underGlueEffect = true;
 
-            maxMovementSpeed += movementSpeedPlus;
+            initialMaxMovementSpeedCart = maxMovementSpeedCart;
+            initialMaxMovementSpeedSurfboard = maxMovementSpeedSurfboard;
+
+            maxMovementSpeedCart += movementSpeedPlus;
+            maxMovementSpeedSurfboard += movementSpeedPlus;
             acceleration *= glueAccelerationMultipliyer;
 
             Invoke(nameof(ResetGlue), duration);
@@ -92,7 +130,8 @@ public class Player : MonoBehaviour
     {
         underGlueEffect = false;
 
-        maxMovementSpeed = initialMaxMovementSpeed;
+        maxMovementSpeedCart = initialMaxMovementSpeedCart;
+        maxMovementSpeedSurfboard = initialMaxMovementSpeedSurfboard;
         acceleration = initialAcceleration;
     }
 
@@ -108,9 +147,9 @@ public class Player : MonoBehaviour
 
     public void Reset()
     {
-        currentFuel = maxFuel;
-
         underGlueEffect = false;
+
+        isOnCart = true;
 
         transform.position = spawnPos;
     }

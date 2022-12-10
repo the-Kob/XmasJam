@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Powerup : MonoBehaviour
@@ -7,85 +8,28 @@ public class Powerup : MonoBehaviour
     [SerializeField]
     bool isGlue;
 
+    public float baseDuration;
     float duration;
 
-    float maxMovementSpeedThreshold; // Ranged from 0 to 1, works as a percentage
+    public float baseMaxMovementSpeedThreshold;
+    float maxMovementSpeedThreshold;
 
-    float fuelRestorePercentage; // Ranged from 0 to 1, works as a percentage
+    public float baseFuelRestorePercentage;
+    float fuelRestorePercentage;
+
+    Store store;
 
     void Awake()
     {
+        store = FindObjectOfType<Store>();
+
         if (isGlue)
         {
-            #region Set duration with store level
-            int storeGlueDurationLevel = 0; // TODO Needs to be retrieved from the store, probably a global variable
-
-            switch (storeGlueDurationLevel)
-            {
-                case 0: // Base value
-                    duration = 3f;
-                    break;
-                case 1:
-                    duration = 4.75f;
-                    break;
-                case 2:
-                    duration = 6.5f;
-                    break;
-                case 3:
-                    duration = 8.25f;
-                    break;
-                case 4:
-                    duration = 10f;
-                    break;
-            }
-            #endregion
-
-            #region Set movement speed threshold with store level
-            int storeGlueMovementSpeedThresholdLevel = 0; // TODO Needs to be retrieved from the store, probably a global variable
-
-            switch (storeGlueMovementSpeedThresholdLevel)
-            {
-                case 0: // Base value
-                    maxMovementSpeedThreshold = 0.1f;
-                    break;
-                case 1:
-                    maxMovementSpeedThreshold = 0.25f;
-                    break;
-                case 2:
-                    maxMovementSpeedThreshold = 0.5f;
-                    break;
-                case 3:
-                    maxMovementSpeedThreshold = 0.75f;
-                    break;
-                case 4:
-                    maxMovementSpeedThreshold = 1f;
-                    break;
-            }
-            #endregion
+            duration = baseDuration + baseDuration * (store.glueLevel * 0.167f); // Each level increases the glue duration by around 0.5 second
+            maxMovementSpeedThreshold = baseMaxMovementSpeedThreshold + (store.glueLevel * 0.1f);
         } else
         {
-            #region Set percentage of fuel restore with store level
-            int storeFuelRestorePercentageLevel = 0; // TODO Needs to be retrieved from the store, probably a global variable
-
-            switch (storeFuelRestorePercentageLevel)
-            {
-                case 0: // Base value
-                    fuelRestorePercentage = 0.1f;
-                    break;
-                case 1:
-                    fuelRestorePercentage = 0.25f;
-                    break;
-                case 2:
-                    fuelRestorePercentage = 0.5f;
-                    break;
-                case 3:
-                    fuelRestorePercentage = 0.75f;
-                    break;
-                case 4:
-                    fuelRestorePercentage = 1f;
-                    break;
-            }
-            #endregion
+            fuelRestorePercentage = baseFuelRestorePercentage + (store.refuelLevel * 0.05f);
         }
     }
 
@@ -99,7 +43,15 @@ public class Powerup : MonoBehaviour
 
             if (isGlue)
             {
-                float movementSpeedPlus = player.maxMovementSpeed * maxMovementSpeedThreshold;
+                float movementSpeedPlus;
+
+                if(player.isOnCart)
+                {
+                    movementSpeedPlus = player.maxMovementSpeedCart * maxMovementSpeedThreshold;
+                } else
+                {
+                    movementSpeedPlus = player.maxMovementSpeedSurfboard * maxMovementSpeedThreshold;
+                }
 
                 player.SniffGlue(movementSpeedPlus, duration);
             }

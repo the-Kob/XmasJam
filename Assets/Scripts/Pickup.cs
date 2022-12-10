@@ -15,6 +15,11 @@ public class Pickup : MonoBehaviour
         store = FindObjectOfType<Store>();
 
         value = 2 * store.pickupLevel;
+
+        if(store.pickupLevel == 0)
+        {
+            value = 1;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

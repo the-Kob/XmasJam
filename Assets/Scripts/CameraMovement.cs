@@ -5,13 +5,14 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     Player player;
+    public Canvas canvas;
 
     bool isFollowingPlayer, isLocked;
 
     public Transform storePosition, playPosition;
     public float transitionDuration = 2.5f;
 
-    Vector3 playerOffset = new Vector3(6, 1.5f, -10);
+    Vector3 playerOffset = new Vector3(7, 1.4629146f, -10);
 
     void Awake()
     {
@@ -53,6 +54,8 @@ public class CameraMovement : MonoBehaviour
         isFollowingPlayer = false;
 
         StartCoroutine(Transition(storePosition));
+
+        Invoke(nameof(ShowStore), transitionDuration);
     }
 
     IEnumerator Transition(Transform target)
@@ -69,5 +72,10 @@ public class CameraMovement : MonoBehaviour
             yield return 0;
             isLocked = true;
         }
+    }
+
+    void ShowStore()
+    {
+        canvas.gameObject.SetActive(true);
     }
 }

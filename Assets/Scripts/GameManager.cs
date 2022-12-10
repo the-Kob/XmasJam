@@ -2,15 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Transactions;
+using TMPro;
 using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    static float MAX_TIME_INACTIVE = 3.0f;
+    public float maxTimeInactive;
 
     Player player;
     CameraMovement cam;
+    public Canvas canvas;
+    public TextMeshProUGUI playerCoinsText;
 
     public MapManager mapManager;
 
@@ -32,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     void FixedUpdate()
     {
+        playerCoinsText.text = "Coins: " + player.coins;
+
         if (!isGameRunning)
         {
             if (Input.GetKeyDown(KeyCode.P))
@@ -66,7 +71,7 @@ public class GameManager : MonoBehaviour
                 timePassedInactive = 0.0f;
             }
 
-            if (timePassedInactive >= MAX_TIME_INACTIVE)
+            if (timePassedInactive >= maxTimeInactive)
             {
                 Reset();
             }
@@ -75,10 +80,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void PreparePlay()
+    public void PreparePlay()
     {
         player.UpdateFuel();
         cam.SwitchToPlay();
+        canvas.gameObject.SetActive(false);
 
         Invoke(nameof(Play), 3); // Let the camera go its place
     }

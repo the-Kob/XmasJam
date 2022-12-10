@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2585327555413691157
 Transform:
   m_ObjectHideFlags: 0
@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6447450530291913359}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!199 &6111075237914685175
 ParticleSystemRenderer:
@@ -4823,7 +4823,7 @@ GameObject:
   - component: {fileID: 2227701811771300538}
   - component: {fileID: 7039872660968784614}
   m_Layer: 6
-  m_Name: GameObject
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4837,12 +4837,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6001359714619258012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.589, y: -0.062, z: 0}
+  m_LocalPosition: {x: -0.589, y: -0.062, z: 2}
   m_LocalScale: {x: 0.2427, y: 0.2119, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6447450530291913359}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7039872660968784614
 SpriteRenderer:
@@ -4928,8 +4928,8 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: -0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2227701811771300538}
   - {fileID: 2585327555413691157}
+  - {fileID: 2227701811771300538}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4984,6 +4984,8 @@ MonoBehaviour:
   coins: 0
   underGlueEffect: 0
   rb: {fileID: 0}
+  animator: {fileID: 900197976}
+  fireExtinguisherParticle: {fileID: 7719175657789641229}
 --- !u!61 &6447450530291913358
 BoxCollider2D:
   m_ObjectHideFlags: 0

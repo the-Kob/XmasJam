@@ -45,6 +45,8 @@ public class Player : MonoBehaviour
 
     public Animator animator;
 
+    public ParticleSystem fireExtinguisherParticle;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -86,6 +88,13 @@ public class Player : MonoBehaviour
         if (!underGlueEffect)
         {
             currentFuel -= Time.deltaTime;
+            // play the fire extinguisher particle
+            fireExtinguisherParticle.Play();
+        }
+        else
+        {
+            // stop the fire extinguisher particle
+            fireExtinguisherParticle.Stop();
         }
     }
 
@@ -159,5 +168,11 @@ public class Player : MonoBehaviour
         isOnCart = true;
 
         transform.position = spawnPos;
+    }
+
+    // stop particle system
+    public void StopParticle()
+    {
+        fireExtinguisherParticle.Stop();
     }
 }

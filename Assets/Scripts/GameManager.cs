@@ -48,6 +48,10 @@ public class GameManager : MonoBehaviour
             {
                 player.Move();
             }
+            else
+            {
+                player.StopParticle();
+            }
 
             #endregion
 

@@ -378,6 +378,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6001359714619258012, guid: 6141ed918a520c041b0adc3d1ff07a56, type: 3}
+      propertyPath: m_Name
+      value: GameObject
+      objectReference: {fileID: 0}
     - target: {fileID: 6447450530291913355, guid: 6141ed918a520c041b0adc3d1ff07a56, type: 3}
       propertyPath: m_Name
       value: Player
@@ -424,6 +428,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6447450530291913359, guid: 6141ed918a520c041b0adc3d1ff07a56, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719175657789641229, guid: 6141ed918a520c041b0adc3d1ff07a56, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719175657789641229, guid: 6141ed918a520c041b0adc3d1ff07a56, type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719175657789641229, guid: 6141ed918a520c041b0adc3d1ff07a56, type: 3}
+      propertyPath: stopAction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719175657789641229, guid: 6141ed918a520c041b0adc3d1ff07a56, type: 3}
+      propertyPath: lengthInSec
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719175657789641229, guid: 6141ed918a520c041b0adc3d1ff07a56, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719175657789641229, guid: 6141ed918a520c041b0adc3d1ff07a56, type: 3}
+      propertyPath: ringBufferMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719175657789641229, guid: 6141ed918a520c041b0adc3d1ff07a56, type: 3}
+      propertyPath: useUnscaledTime
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

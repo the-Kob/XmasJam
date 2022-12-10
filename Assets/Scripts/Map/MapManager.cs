@@ -47,11 +47,18 @@ public class MapManager : MonoBehaviour
             int randomIndex = Random.Range(0, avalibleSections.Count);
             // instantiate section
             GameObject newSection = Instantiate(avalibleSections[randomIndex], transform);
-            //get lenght of section
-            float sectionLength = newSection.transform.localScale.x;
             // set position of new section next to the last section on the list, if there is no sections on the list, set position to 0
             if (sections.Count > 0)
-                newSection.transform.position = new Vector3(sections[sections.Count - 1].transform.position.x + sectionLength, 0, 0);
+            {
+                // find child object of sections[sections.Count - 1] with name "Ground"
+                var ground = sections[sections.Count - 1].transform.Find("Ground");
+                // get sprite renderer of ground
+                var groundSpriteRenderer = ground.GetComponent<SpriteRenderer>();
+                // get size of ground sprite
+                var groundSize = groundSpriteRenderer.sprite.bounds.size;
+                // set position of new section
+                newSection.transform.position = new Vector3(sections[sections.Count - 1].transform.position.x + groundSize.x, 0, 0);
+            }
             else
                 newSection.transform.position = new Vector3(0, 0, 0);
             // Get children of new section with tag "SpawnPoint"
@@ -127,6 +134,13 @@ public class MapManager : MonoBehaviour
         sections.Clear();
         // add new section to sections list
         sections.Add(newSection);
+        // create 2 new sections
+        /*GenerateSection(2);
+        // delete the first 2 sectiosn of old list
+        Destroy(oldSections[0]);
+        Destroy(oldSections[1]);
+        oldSections.RemoveAt(0);
+        oldSections.RemoveAt(0);*/
     }
 
     // destroy all sections

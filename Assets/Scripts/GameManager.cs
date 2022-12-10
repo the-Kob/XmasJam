@@ -101,8 +101,15 @@ public class GameManager : MonoBehaviour
         isGameRunning = false;
         timePassedInactive = 0.0f;
         mapManager.reseting = true;
+        GiveCoins();
         mapManager.GenerateSectionAtZero();
         player.Reset();
         cam.SwitchToStore();
+    }
+
+    // give coins to the player equal to the distance traveled
+    public void GiveCoins()
+    {
+        player.AddCoins((int)(player.transform.position.x / 10));
     }
 }

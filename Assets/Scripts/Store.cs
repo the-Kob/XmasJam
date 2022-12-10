@@ -50,12 +50,14 @@ public class Store : MonoBehaviour
 
     public void UpgradeShoopingCart()
     {
-        if(CanUpgrade(shoppingCartLevel))
+        if (CanUpgrade(shoppingCartLevel))
         {
             shoppingCartLevel++;
 
             player.movementSpeedCartMultiplier += 0.2f; // Increases 20% each time, linear
-        } else
+            player.coins -= CalculateCost(shoppingCartLevel);
+        }
+        else
         {
             // Insert not enough food popup
         }
@@ -68,7 +70,9 @@ public class Store : MonoBehaviour
             surfboardLevel++;
 
             player.maxMovementSpeedSurfboard += 0.2f; // Increases 20% each time, linear
-        } else
+            player.coins -= CalculateCost(surfboardLevel);
+        }
+        else
         {
             // Insert not enough food popup
         }
@@ -81,7 +85,9 @@ public class Store : MonoBehaviour
             fuelCapacityLevel++;
 
             player.fuelMultiplier += 0.5f; // increases 50% each time, linear
-        } else
+            player.coins -= CalculateCost(fuelCapacityLevel);
+        }
+        else
         {
             // Insert not enough food popup
         }
@@ -92,7 +98,9 @@ public class Store : MonoBehaviour
         if (CanUpgrade(pickupLevel))
         {
             pickupLevel++;
-        } else
+            player.coins -= CalculateCost(pickupLevel);
+        }
+        else
         {
             // Insert not enough food popup
         }
@@ -103,7 +111,9 @@ public class Store : MonoBehaviour
         if (CanUpgrade(glueLevel))
         {
             glueLevel++;
-        } else
+            player.coins -= CalculateCost(glueLevel);
+        }
+        else
         {
             // Insert not enough food popup
         }
@@ -114,7 +124,9 @@ public class Store : MonoBehaviour
         if (CanUpgrade(refuelLevel))
         {
             refuelLevel++;
-        } else
+            player.coins -= CalculateCost(refuelLevel);
+        }
+        else
         {
             // Insert not enough food popup
         }
@@ -124,7 +136,7 @@ public class Store : MonoBehaviour
     {
         int cost = CalculateCost(level);
 
-        if(level == 0)
+        if (level == 0)
         {
             return 5 <= player.coins;
         }

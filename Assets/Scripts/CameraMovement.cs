@@ -12,7 +12,7 @@ public class CameraMovement : MonoBehaviour
     public Transform storePosition, playPosition;
     public float transitionDuration = 2.5f;
 
-    Vector3 playerOffset = new Vector3(7, 1.4629146f, -10);
+    Vector3 playerOffset = new Vector3(4.5f, 1.4629146f, -10);
 
     void Awake()
     {
@@ -32,8 +32,6 @@ public class CameraMovement : MonoBehaviour
             }
             else
             {
-                //float paralax = (player.transform.position.x - startPos) * paralaxEffect;
-                //transform.position = new Vector3(startPos + paralax, transform.position.y, transform.position.z);
                 transform.position = player.transform.position + playerOffset;
 
             }

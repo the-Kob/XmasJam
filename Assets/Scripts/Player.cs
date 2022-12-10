@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -47,6 +48,9 @@ public class Player : MonoBehaviour
 
     public ParticleSystem fireExtinguisherParticle;
 
+    public TextMeshProUGUI playerFuel;
+
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -64,6 +68,11 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
 
         Reset();
+    }
+
+    private void Update()
+    {
+        playerFuel.text = "Fuel: " + currentFuel.ToString("F1") + "/" + maxFuel.ToString("0");
     }
 
     public void Move()

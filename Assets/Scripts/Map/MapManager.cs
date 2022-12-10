@@ -32,7 +32,7 @@ public class MapManager : MonoBehaviour
     void Update()
     {
         // check if section is out of the screen and destroy it
-        if (sections.Count > 1) CheckSections();
+        if (sections.Count > 2) CheckSections();
         // if we only have three section left, generate new section
         if (sections.Count < 3 && !reseting)
         {
@@ -101,7 +101,7 @@ public class MapManager : MonoBehaviour
         // get section size
         float sectionSize = sections[0].transform.localScale.x;
         // if section is out of camera view, move it to old sections list
-        if (sectionPosition + sectionSize < cameraPosition - cameraViewSize)
+        if (sectionPosition + sectionSize + 10 < cameraPosition - cameraViewSize)
         {
             oldSections.Add(sections[0]);
             sections.RemoveAt(0);
@@ -125,10 +125,7 @@ public class MapManager : MonoBehaviour
     // Generate section at 0,0,0
     public void GenerateSectionAtZero()
     {
-        // get random section from avalibleSections list
-        int randomIndex = Random.Range(0, avalibleSections.Count);
-        // instantiate section
-        GameObject newSection = Instantiate(avalibleSections[randomIndex], transform);
+        GameObject newSection = Instantiate(shopSection, transform);
         //get lenght of section
         float sectionLength = newSection.transform.localScale.x;
         // set position of new section next to the last section on the list, if there is no sections on the list, set position to 0

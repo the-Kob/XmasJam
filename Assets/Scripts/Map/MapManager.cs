@@ -58,21 +58,25 @@ public class MapManager : MonoBehaviour
                 var groundSize = groundSpriteRenderer.sprite.bounds.size;
                 // set position of new section
                 newSection.transform.position = new Vector3(sections[sections.Count - 1].transform.position.x + groundSize.x, 0, 0);
+                // Get children of new section with tag "SpawnPoint"
+                var collectiblesSpawnPoint = GetComponentsInChildren(newSection.transform, "SpawnPoint");
+                var collectiblesSpawnPoints = GetComponentsInChildren(collectiblesSpawnPoint[1].transform, "SpawnPoint");
+                // loop through all children and randomly spawn collectibles with chance = chanceToSpawnCollectible
+                foreach (var spawnPoint in collectiblesSpawnPoints)
+                {
+                    if (Random.Range(0, 100) < chanceToSpawnCollectible)
+                    {
+                        // get random collectible from avalibleCollectibles list
+                        int randomCollectibleIndex = Random.Range(0, avalibleCollectibles.Count);
+                        // instantiate collectible
+                        GameObject newCollectible = Instantiate(avalibleCollectibles[randomCollectibleIndex], spawnPoint.position, Quaternion.identity, spawnPoint);
+                    }
+                }
             }
             else
-                newSection.transform.position = new Vector3(0, 0, 0);
-            // Get children of new section with tag "SpawnPoint"
-            var collectiblesSpawnPoints = GetComponentsInChildren(newSection.transform, "SpawnPoint");
-            // loop through all children and randomly spawn collectibles with chance = chanceToSpawnCollectible
-            foreach (Transform collectiblesSpawnPoint in collectiblesSpawnPoints)
             {
-                int randomCollectibleIndex = Random.Range(0, avalibleCollectibles.Count);
-                int randomChance = Random.Range(0, 100);
-                if (randomChance < chanceToSpawnCollectible)
-                {
-                    GameObject newCollectible = Instantiate(avalibleCollectibles[randomCollectibleIndex], collectiblesSpawnPoint.position, Quaternion.identity);
-                    newCollectible.transform.parent = collectiblesSpawnPoint;
-                }
+                newSection.transform.position = new Vector3(0, 0, 0);
+
             }
             // add new section to sections list
             sections.Add(newSection);

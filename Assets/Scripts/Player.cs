@@ -63,10 +63,11 @@ public class Player : MonoBehaviour
     {
         float maxSpeed;
 
-        if(isOnCart)
+        if (isOnCart)
         {
             maxSpeed = maxMovementSpeedCart * movementSpeedCartMultiplier;
-        } else
+        }
+        else
         {
             maxSpeed = maxMovementSpeedSurfboard * movementSpeedSufboardMultiplier;
         }
@@ -102,7 +103,7 @@ public class Player : MonoBehaviour
 
     public void SniffGlue(float movementSpeedPlus, float duration)
     {
-        if(underGlueEffect)
+        if (underGlueEffect)
         {
             // When the player is already under the glue effect when sniffing another glue tube,
             // we just need to delay when the reset to the altered stats happens.
@@ -110,7 +111,8 @@ public class Player : MonoBehaviour
 
             CancelInvoke(nameof(ResetGlue));
             Invoke(nameof(ResetGlue), duration);
-        } else
+        }
+        else
         {
             underGlueEffect = true;
 
@@ -123,7 +125,7 @@ public class Player : MonoBehaviour
 
             Invoke(nameof(ResetGlue), duration);
         }
-        
+
     }
 
     void ResetGlue()
@@ -139,7 +141,7 @@ public class Player : MonoBehaviour
     {
         currentFuel += fuelPlus;
 
-        if(currentFuel > maxFuel)
+        if (currentFuel > maxFuel)
         {
             currentFuel = maxFuel;
         }

@@ -68,12 +68,24 @@ public class Player : MonoBehaviour
 
     public void SniffGlue(float movementSpeedPlus, float duration)
     {
-        underGlueEffect = true;
+        if(underGlueEffect)
+        {
+            // When the player is already under the glue effect when sniffing another glue tube,
+            // we just need to delay when the reset to the altered stats happens.
+            // For that we cancel all of the invokes of the method ResetGlue and then we Invoke it again.
 
-        maxMovementSpeed += movementSpeedPlus;
-        acceleration *= glueAccelerationMultipliyer;
+            CancelInvoke(nameof(ResetGlue));
+            Invoke(nameof(ResetGlue), duration);
+        } else
+        {
+            underGlueEffect = true;
 
-        Invoke(nameof(ResetGlue), duration);
+            maxMovementSpeed += movementSpeedPlus;
+            acceleration *= glueAccelerationMultipliyer;
+
+            Invoke(nameof(ResetGlue), duration);
+        }
+        
     }
 
     void ResetGlue()

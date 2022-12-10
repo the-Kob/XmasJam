@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
     static float MAX_TIME_INACTIVE = 3.0f;
 
     public Player player;
+    public CameraMovement cam;
 
     bool isGameRunning;
 
@@ -16,12 +18,22 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        isGameRunning = true; // TODO change this value to false, it's only true for debugging purposes
+        isGameRunning = false;
         timePassedInactive = 0.0f;
     }
 
     void FixedUpdate()
     {
+        if(!isGameRunning)
+        {
+            if(Input.GetKeyDown(KeyCode.P))
+            {
+                PreparePlay();
+
+                Invoke(nameof(Play), 3); // Let the camera go its place
+            }
+        }
+
         if (isGameRunning)
         {
             # region Move
@@ -50,14 +62,24 @@ public class GameManager : MonoBehaviour
 
             #endregion
         }
-
-        Debug.Log(player.rb.velocity.x);
     }
 
-    private void Reset()
+    void PreparePlay()
+    {
+        cam.SwitchToPlay();
+    }
+
+    void Play()
+    {
+        isGameRunning = true;
+    }
+
+    void Reset()
     {
         isGameRunning = false;
+        timePassedInactive = 0.0f;
 
         player.Reset();
+        cam.SwitchToStore();
     }
 }

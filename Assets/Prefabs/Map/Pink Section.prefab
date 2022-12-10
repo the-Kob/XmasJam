@@ -19,6 +19,18 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2537464597475338227, guid: 7a40b90efb8cf7944897074f3a2e588a, type: 3}
+      propertyPath: m_Color.b
+      value: 0.932148
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537464597475338227, guid: 7a40b90efb8cf7944897074f3a2e588a, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537464597475338227, guid: 7a40b90efb8cf7944897074f3a2e588a, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2799014281790871879, guid: 7a40b90efb8cf7944897074f3a2e588a, type: 3}
       propertyPath: m_Name
       value: Pink Section

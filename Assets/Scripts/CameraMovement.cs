@@ -21,7 +21,7 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        if(isLocked)
+        if (isLocked)
         {
             if (!isFollowingPlayer)
             {
@@ -29,7 +29,10 @@ public class CameraMovement : MonoBehaviour
             }
             else
             {
+                //float paralax = (player.transform.position.x - startPos) * paralaxEffect;
+                //transform.position = new Vector3(startPos + paralax, transform.position.y, transform.position.z);
                 transform.position = player.transform.position + playerOffset;
+
             }
         }
     }

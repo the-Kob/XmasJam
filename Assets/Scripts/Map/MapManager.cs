@@ -25,7 +25,7 @@ public class MapManager : MonoBehaviour
     void Update()
     {
         // check if section is out of the screen and destroy it
-        CheckSections();
+        if (sections.Count > 1) CheckSections();
         // if we only have three section left, generate new section
         if (sections.Count < 3)
         {
@@ -100,6 +100,25 @@ public class MapManager : MonoBehaviour
             }
         }
         return childrenWithTag.ToArray();
+    }
+
+    // Generate section at 0,0,0
+    public void GenerateSectionAtZero()
+    {
+        // get random section from avalibleSections list
+        int randomIndex = Random.Range(0, avalibleSections.Count);
+        // instantiate section
+        GameObject newSection = Instantiate(avalibleSections[randomIndex], transform);
+        //get lenght of section
+        float sectionLength = newSection.transform.localScale.x;
+        // set position of new section next to the last section on the list, if there is no sections on the list, set position to 0
+        newSection.transform.position = new Vector3(0, 0, 0);
+        // Get children of new section with tag "SpawnPoint"
+        var collectiblesSpawnPoints = GetComponentsInChildren(newSection.transform, "SpawnPoint");
+        // loop through all children and randomly spawn collectibles with chance = chanceToSpawnCollectible
+        // add new section to sections list
+        sections.Add(newSection);
+        // destroy all sections except the one created
     }
 
 

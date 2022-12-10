@@ -12,21 +12,26 @@ public class GameManager : MonoBehaviour
     public Player player;
     public CameraMovement cam;
 
-    bool isGameRunning;
+    public MapManager mapManager;
+
+    public bool isGameRunning;
 
     float timePassedInactive;
+
+    public AudioManager audioManager;
 
     void Awake()
     {
         isGameRunning = false;
         timePassedInactive = 0.0f;
+        audioManager.Play("AmbienceMusic");
     }
 
     void FixedUpdate()
     {
-        if(!isGameRunning)
+        if (!isGameRunning)
         {
-            if(Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.P))
             {
                 PreparePlay();
 
@@ -50,12 +55,13 @@ public class GameManager : MonoBehaviour
             if (Vector2.SqrMagnitude(player.rb.velocity) <= 0.01)
             {
                 timePassedInactive += Time.fixedDeltaTime;
-            } else
+            }
+            else
             {
                 timePassedInactive = 0.0f;
             }
 
-            if(timePassedInactive >= MAX_TIME_INACTIVE)
+            if (timePassedInactive >= MAX_TIME_INACTIVE)
             {
                 Reset();
             }
@@ -79,6 +85,7 @@ public class GameManager : MonoBehaviour
         isGameRunning = false;
         timePassedInactive = 0.0f;
 
+        mapManager.GenerateSectionAtZero();
         player.Reset();
         cam.SwitchToStore();
     }

@@ -57,7 +57,7 @@ public class Powerup : MonoBehaviour
             }
             else
             {
-                float fuelPlus = player.currentFuel * fuelRestorePercentage;
+                float fuelPlus = player.maxFuel * fuelRestorePercentage;
 
                 player.RefillFuel(fuelPlus);
             }

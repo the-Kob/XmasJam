@@ -1213,7 +1213,7 @@ PrefabInstance:
       objectReference: {fileID: 973895707704602178, guid: 34248726e99c09e4398543b13493145c, type: 3}
     - target: {fileID: 3301295465091237984, guid: cc9872fb34554bf47acb7394ef7b2146, type: 3}
       propertyPath: chanceToSpawnCollectible
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3301295465091237984, guid: cc9872fb34554bf47acb7394ef7b2146, type: 3}
       propertyPath: avalibleSections.Array.size

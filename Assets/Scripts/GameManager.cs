@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     {
         playerCoinsText.text = "Coins: " + player.coins;
 
+        /*
         if (!isGameRunning)
         {
             if (Input.GetKeyDown(KeyCode.P))
@@ -43,12 +44,13 @@ public class GameManager : MonoBehaviour
                 PreparePlay();
             }
         }
+        */
 
         if (isGameRunning)
         {
             # region Move
 
-            if (Input.GetKey(KeyCode.Space) && player.HasFuel())
+            if (Input.GetKey(KeyCode.Space) && (player.HasFuel() || player.underGlueEffect))
             {
                 player.Move();
             }

@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
         initialAcceleration = acceleration;
         fuelMultiplier = 1.0f;
 
-        coins = 10; // Coins are only set to 0 at the start of the game
+        coins = 0; // Coins are only set to 0 at the start of the game
 
         // get animator component
         animator = GetComponent<Animator>();

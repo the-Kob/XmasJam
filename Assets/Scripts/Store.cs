@@ -10,6 +10,8 @@ public class Store : MonoBehaviour
     [HideInInspector]
     public int pickupLevel, glueLevel, refuelLevel;
 
+    public AudioManager audioManager;
+
     public TextMeshProUGUI
         shoppingCartLevelText, shoppingCartCostText,
         surfboardLevelText, surfboardCostText,
@@ -54,6 +56,8 @@ public class Store : MonoBehaviour
         {
             player.coins -= CalculateCost(shoppingCartLevel);
 
+            PlayShopSound();
+
             shoppingCartLevel++;
 
             player.movementSpeedCartMultiplier += 0.2f; // Increases 20% each time, linear
@@ -69,6 +73,8 @@ public class Store : MonoBehaviour
         if (CanUpgrade(surfboardLevel))
         {
             player.coins -= CalculateCost(surfboardLevel);
+
+            PlayShopSound();
 
             surfboardLevel++;
 
@@ -86,6 +92,8 @@ public class Store : MonoBehaviour
         {
             player.coins -= CalculateCost(fuelCapacityLevel);
 
+            PlayShopSound();
+
             fuelCapacityLevel++;
 
             player.fuelMultiplier += 0.5f; // increases 50% each time, linear
@@ -102,6 +110,8 @@ public class Store : MonoBehaviour
         {
             player.coins -= CalculateCost(pickupLevel);
 
+            PlayShopSound();
+
             pickupLevel++;
         }
         else
@@ -116,6 +126,8 @@ public class Store : MonoBehaviour
         {
             player.coins -= CalculateCost(glueLevel);
 
+            PlayShopSound();
+
             glueLevel++;
         }
         else
@@ -129,6 +141,8 @@ public class Store : MonoBehaviour
         if (CanUpgrade(refuelLevel))
         {
             player.coins -= CalculateCost(refuelLevel);
+
+            PlayShopSound();
 
             refuelLevel++;
         }
@@ -153,5 +167,15 @@ public class Store : MonoBehaviour
     int CalculateCost(int level)
     {
         return level == 0 ? 5 : ((level * (level + 1)) / 2) * 15; // Cost is equal to the factorial of the level
+    }
+
+    // play shop sound
+    public void PlayShopSound()
+    {
+        if (audioManager.IsPlaying("ShopSound") == true)
+        {
+            audioManager.Stop("ShopSound");
+        }
+        audioManager.Play("ShopSound");
     }
 }

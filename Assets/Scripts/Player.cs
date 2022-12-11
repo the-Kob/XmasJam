@@ -50,6 +50,8 @@ public class Player : MonoBehaviour
 
     public TextMeshProUGUI playerFuel, playerDistance;
 
+    public AudioManager audioManager;
+
 
     void Awake()
     {
@@ -62,7 +64,7 @@ public class Player : MonoBehaviour
         initialAcceleration = acceleration;
         fuelMultiplier = 1.0f;
 
-        coins = 0; // Coins are only set to 0 at the start of the game
+        coins = 10; // Coins are only set to 0 at the start of the game
 
         // get animator component
         animator = GetComponent<Animator>();
@@ -73,7 +75,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         playerFuel.text = "Fuel: " + currentFuel.ToString("F1") + "/" + maxFuel.ToString("0");
-        playerDistance.text = "Distance: " + (int) (transform.position.x - spawnPos.x);
+        playerDistance.text = "Distance: " + (int)(transform.position.x - spawnPos.x);
     }
 
     public void Move()
@@ -100,11 +102,13 @@ public class Player : MonoBehaviour
             currentFuel -= Time.deltaTime;
             // play the fire extinguisher particle
             fireExtinguisherParticle.Play();
+            audioManager.Play("FireExtinguisher");
         }
         else
         {
             // stop the fire extinguisher particle
             fireExtinguisherParticle.Stop();
+            audioManager.Stop("FireExtinguisher");
         }
     }
 
@@ -184,5 +188,6 @@ public class Player : MonoBehaviour
     public void StopParticle()
     {
         fireExtinguisherParticle.Stop();
+        audioManager.Stop("FireExtinguisher");
     }
 }

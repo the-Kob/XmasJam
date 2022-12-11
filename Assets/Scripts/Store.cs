@@ -52,10 +52,11 @@ public class Store : MonoBehaviour
     {
         if (CanUpgrade(shoppingCartLevel))
         {
+            player.coins -= CalculateCost(shoppingCartLevel);
+
             shoppingCartLevel++;
 
             player.movementSpeedCartMultiplier += 0.2f; // Increases 20% each time, linear
-            player.coins -= CalculateCost(shoppingCartLevel);
         }
         else
         {
@@ -67,10 +68,11 @@ public class Store : MonoBehaviour
     {
         if (CanUpgrade(surfboardLevel))
         {
+            player.coins -= CalculateCost(surfboardLevel);
+
             surfboardLevel++;
 
             player.maxMovementSpeedSurfboard += 0.2f; // Increases 20% each time, linear
-            player.coins -= CalculateCost(surfboardLevel);
         }
         else
         {
@@ -82,10 +84,11 @@ public class Store : MonoBehaviour
     {
         if (CanUpgrade(fuelCapacityLevel))
         {
+            player.coins -= CalculateCost(fuelCapacityLevel);
+
             fuelCapacityLevel++;
 
             player.fuelMultiplier += 0.5f; // increases 50% each time, linear
-            player.coins -= CalculateCost(fuelCapacityLevel);
         }
         else
         {
@@ -97,8 +100,9 @@ public class Store : MonoBehaviour
     {
         if (CanUpgrade(pickupLevel))
         {
-            pickupLevel++;
             player.coins -= CalculateCost(pickupLevel);
+
+            pickupLevel++;
         }
         else
         {
@@ -110,8 +114,9 @@ public class Store : MonoBehaviour
     {
         if (CanUpgrade(glueLevel))
         {
-            glueLevel++;
             player.coins -= CalculateCost(glueLevel);
+
+            glueLevel++;
         }
         else
         {
@@ -123,8 +128,9 @@ public class Store : MonoBehaviour
     {
         if (CanUpgrade(refuelLevel))
         {
-            refuelLevel++;
             player.coins -= CalculateCost(refuelLevel);
+
+            refuelLevel++;
         }
         else
         {

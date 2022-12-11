@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
 
     public ParticleSystem fireExtinguisherParticle;
 
-    public TextMeshProUGUI playerFuel;
+    public TextMeshProUGUI playerFuel, playerDistance;
 
 
     void Awake()
@@ -73,6 +73,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         playerFuel.text = "Fuel: " + currentFuel.ToString("F1") + "/" + maxFuel.ToString("0");
+        playerDistance.text = "Distance: " + (int) (transform.position.x - spawnPos.x);
     }
 
     public void Move()
